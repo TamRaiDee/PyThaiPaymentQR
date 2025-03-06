@@ -15,9 +15,7 @@ def constant_and_checksum_test(ksp_str: str):
     ), "Merchant Account Information representation is incorrect."
 
     # Expected 0115010753600031508 in ksp_str
-    assert (
-        "0115010753600031508" in ksp_str
-    ), "Merchant Category Code representation is incorrect."
+    assert "0115010753600031508" in ksp_str, "Merchant Category Code representation is incorrect."
 
     # Expected 5303764 in ksp_str
     assert "5303764" in ksp_str, "Transaction Currency representation is incorrect."
@@ -61,9 +59,7 @@ def test_KShopQR():
     assert "30" in ksp.fields, "BillPayment field should be in KShopQR fields."
 
     # Expected field 30 data
-    assert (
-        str(ksp.fields["30"]) in ksp_str
-    ), "BillPayment field data should be in KShopQR string."
+    assert str(ksp.fields["30"]) in ksp_str, "BillPayment field data should be in KShopQR string."
 
     # Expected field 31
     assert "31" in ksp.fields, "PaymentInnovation field should be in KShopQR fields."
