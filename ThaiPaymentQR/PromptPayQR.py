@@ -8,7 +8,7 @@ class PromptPayQR:
     def __init__(self):
         self.crc_obj = CRCCCITT("FFFF")
         self.addField("version", "01", "00")
-        self.addField("onetime", "12", "01")
+        self.addField("onetime", "11", "01")
         self.addField("currency", "764", "53")
         self.addField("country", "TH", "58")
 
@@ -29,7 +29,7 @@ class PromptPayQR:
 
         crc = self.crc_obj.calculate(outStr + "6304")
         crchex = hex(crc)[2:].upper()
-        crcField = PromptPayField("63", "crc16", crchex)
+        crcField = PromptPayField("63", "crc16", crchex.zfill(4))
         outStr += str(crcField)
 
         return outStr

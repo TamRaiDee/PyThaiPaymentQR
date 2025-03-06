@@ -14,7 +14,7 @@ class KShopQR(PromptPayQR):
         ]
         payment_innovation_data = [
             PromptPayField("00", "AppID", "A000000677010113"),
-            PromptPayField("01", "BillerID", "010753600031508"),
+            PromptPayField("01", "AcquirerID", "004"),
             PromptPayField("02", "ShopID", shopID),
             PromptPayField("04", "Ref", f"KPS{Ref}"),
         ]
