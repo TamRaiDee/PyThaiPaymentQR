@@ -6,8 +6,8 @@ def constant_and_checksum_test(mmn_str: str):
     # Expected 000201 in mmn_str
     assert "000201" in mmn_str, "Prefix representation is incorrect."
 
-    # Expected 010212 in mmn_str
-    assert "010212" in mmn_str, "Payload Format Indicator representation is incorrect."
+    # Expected 010211 in mmn_str
+    assert "010211" in mmn_str, "Payload Format Indicator representation is incorrect."
 
     # Expected 0016A000000677010112 in mmn_str
     assert (
@@ -68,11 +68,11 @@ def test_maemaneeqr():
 
     # Expected data (without 8 last characters) in mmn_str
     assert len(mmn_str[:-8]) == len(
-        "00020101021230720016A000000677010112011501075360001028602150140000008209100310TESTPYTHON5303764540514.535802TH622007160000000000085234"
+        "00020101021130720016A000000677010112011501075360001028602150140000008209100310TESTPYTHON5303764540514.535802TH622007160000000000085234"
     ), "Data length is incorrect."
 
 
-def test_maemaneeqr_2():
+def test_MaeManeeQR_2():
     from ThaiPaymentQR import MaeManeeQR
 
     mmn = MaeManeeQR("014000000820910", "312121")
@@ -105,8 +105,18 @@ def test_maemaneeqr_2():
 
     # Expected data (without 8 last characters) in mmn_str
     assert len(mmn_str[:-8]) == len(
-        "00020101021230680016A000000677010112011501075360001028602150140000008209100306312121530376454071212.005802TH622007160000000000085234"
+        "00020101021130680016A000000677010112011501075360001028602150140000008209100306312121530376454071212.005802TH622007160000000000085234"
     ), "Data length is incorrect."
+
+
+def test_KShopQR_CRC():
+    from ThaiPaymentQR import MaeManeeQR
+
+    ksp = MaeManeeQR("014000000820910", "Supatipanno")
+    ksp.setAmount(40007.00)
+    ksp_str = str(ksp)
+    assert ksp_str[-4] == "0", "CRC16 checksum for this test should be zero-leading."
+    constant_and_checksum_test(ksp_str)
 
 
 if __name__ == "__main__":
